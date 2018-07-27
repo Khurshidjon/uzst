@@ -369,17 +369,21 @@
                         <hr>
                         <h4 class="text-dark"><span><strong class="text-info">Kelib chiqishi: </strong></span>{!! $product->country->countries !!}</h4>
                         <hr>
-                        <h4 class="text-dark"><span><strong class="text-info">Ishlab chiqarilgan sana: </strong></span>{{ $product->date_born }}</h4>
+                        <h4 class="text-dark"><span><strong class="text-info">Ishlab chiqarilgan sana: </strong></span>{{date('d.m.Y', strtotime($product->date_born)) }}</h4>
                         <hr>
                         <h4 class="text-dark"><span><strong class="text-info">Yaroqlilik muddati: </strong></span>{{ $product->date_death }}</h4>
+                        <hr>
+                        <h4 class="text-dark"><p><b class="text-info">Harid qilingan joyi: </b><br>{{ $product->buy_place }}</p></h4>
                         <hr>
                         <h4 class="text-dark"><p><b class="text-info">Mahsulot haqida: </b><br>{{ $product->details }}</p></h4>
                         <hr>
                         <h4 class="text-dark"><p><b class="text-info">Mahsulot xavfi: </b><br>{{ $product->danger }}</p></h4>
 
                         <div class="order_info d-flex flex-row">
-                            <h4 class="text-dark"><span><strong class="text-info">Mahsulot kiritilgan sana: </strong></span>{{ date_format($product->created_at, 'd.m.Y') }}</h4>
-
+                            <h5 class="text-dark"><span><strong class="text-info">Mahsulot kiritilgan sana: </strong></span>{{ date_format($product->created_at, 'd.m.Y') }}</h5>
+                        </div>
+                        <div class="order_info d-flex flex-row">
+                            <h5 class="text-dark"><span><strong class="text-success">Mahsulot kiritgan shaxs: </strong></span>{{ $product->user->name }}</h5>
                         </div>
                     </div>
                 </div>
@@ -546,7 +550,7 @@
                 <div class="col">
                     <div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
                         <div class="newsletter_title_container">
-                            <div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+                            <div class="newsletter_icon"><img src="{{ asset('images/send.png') }}" alt=""></div>
                             <div class="newsletter_title">Sign up for Newsletter</div>
                             <div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
                         </div>
@@ -654,10 +658,10 @@
                         </div>
                         <div class="logos ml-sm-auto">
                             <ul class="logos_list">
-                                <li><a href="#"><img src="images/logos_1.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/logos_2.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/logos_3.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/logos_4.png" alt=""></a></li>
+                                <li><a href="#"><img src="{{asset('images/logos_1.png')}}" alt=""></a></li>
+                                <li><a href="#"><img src="{{asset('images/logos_2.png')}}" alt=""></a></li>
+                                <li><a href="#"><img src="{{asset('images/logos_3.png')}}" alt=""></a></li>
+                                <li><a href="#"><img src="{{asset('images/logos_4.png')}}" alt=""></a></li>
                             </ul>
                         </div>
                     </div>

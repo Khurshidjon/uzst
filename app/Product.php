@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use Sluggable;
+
     public function sluggable()
     {
         return [
@@ -15,6 +16,10 @@ class Product extends Model
                 'source' => 'title'
             ]
         ];
+    }
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
     protected $fillable = [
       'title',
@@ -37,5 +42,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductPhoto::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

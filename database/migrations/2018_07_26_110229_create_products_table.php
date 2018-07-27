@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('details');
+            $table->text('save_conditions');
             $table->text('danger');
             /*---*/
                 $table->text('danger_type');

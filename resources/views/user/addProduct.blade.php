@@ -147,22 +147,43 @@
                     </div>
                     <div class="form-group">
                         <label for="date_death">Yaroqlilik muddati <span class="text-danger">*</span></label>
-                        <input id="date_death" name="date_death" type="date"  class="form-control {{ $errors->has('date_death') ? ' is-invalid' : '' }}" placeholder="01/01/2018">
-                        @if ($errors->has('date_death'))
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('date_death') }}</strong>
-                        </span>
-                        @endif
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input type="text" name="date_death" id="date_death" class="form-control {{ $errors->has('date_death') ? ' is-invalid' : '' }}">
+                            @if ($errors->has('date_death'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('date_death') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                            <div class="col-lg-6">
+                                <select name="" id="" class="form-control">
+                                    <option selected disabled>--select once--</option>
+                                    <option value="1">Yil</option>
+                                    <option value="2">Oy</option>
+                                    <option value="3">Kun</option>
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                     <div class="col-md-8">
-                {{ csrf_field() }}
                 <div class="form-group">
                     <label for="title">Mahsulot nomi <span class="text-danger">*</span></label>
                     <input id="title" type="text" name="title" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" >
                     @if ($errors->has('title'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('title') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="save_conditions">Saqlash sharoitlar<span class="text-danger">*</span></label>
+                    <input id="save_conditions" type="text" name="save_conditions" class="form-control {{ $errors->has('save_conditions') ? ' is-invalid' : '' }}" >
+                    @if ($errors->has('save_conditions'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('save_conditions') }}</strong>
                         </span>
                     @endif
                 </div>

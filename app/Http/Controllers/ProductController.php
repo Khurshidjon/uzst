@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Country;
+use App\Day;
+use App\Month;
 use App\Product;
 use App\ProductPhoto;
+use App\Year;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +36,11 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $countries = Country::all();
-        return view('user.addProduct', ['categories' => $categories, 'countries' => $countries]);
+        $years = Year::all();
+        $month = Month::all();
+        $days = Day::all();
+
+        return view('user.addProduct', ['categories' => $categories, 'countries' => $countries, 'years' => $years, 'month' =>$month, 'days' => $days]);
     }
 
     /**
@@ -46,9 +53,9 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'photos' => 'required',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:12048'
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120'
         ]);
-        if ($request->hasFile('photos')) {
+        if ($request->hasFile('photos') && count('photos') <= 5) {
 
             $slug = SlugService::createSlug(Product::class, 'slug', $request->title);
 
@@ -59,6 +66,7 @@ class ProductController extends Controller
             $product->title = $request->title;
             $product->slug = $slug;
             $product->details = $request->details;
+            $product->save_conditions = $request->save_conditions;
             $product->danger = $request->danger;
             $product->danger_type = $request->danger_type;
             $product->buy_place = $request->buy_place;

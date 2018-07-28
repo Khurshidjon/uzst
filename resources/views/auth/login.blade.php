@@ -4,7 +4,7 @@
     <body class="bg-image bg-parallax" id="myDiv" onload="myFunction()" style="background: url({{asset('auth-images/9.jpg')}}); background-size: cover;" >
     <div class="container-fluid">
         <div class="row">
-
+            @include('sweetalert::alert')
 
             <div id="login-form" class="col-md-6">
                 <form action="{{route('login')}}" method="post">

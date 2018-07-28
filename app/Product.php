@@ -22,14 +22,20 @@ class Product extends Model
         return 'slug';
     }
     protected $fillable = [
-      'title',
+        'title',
         'slug',
         'details',
+        'save_conditions',
         'danger',
+        'danger_type',
+        'buy_place',
+        'found_date',
         'date_born',
         'date_death',
+        'date_death_name',
         'country_id',
         'category_id',
+        'user_id',
     ];
     public function country()
     {

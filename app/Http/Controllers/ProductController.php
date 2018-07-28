@@ -12,7 +12,7 @@ use App\Year;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::latest()->paginate(20);
         return view('user.index', ['products' => $products]);
     }
 
@@ -36,11 +36,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $countries = Country::all();
-        $years = Year::all();
-        $month = Month::all();
-        $days = Day::all();
-
-        return view('user.addProduct', ['categories' => $categories, 'countries' => $countries, 'years' => $years, 'month' =>$month, 'days' => $days]);
+        return view('user.addProduct', ['categories' => $categories, 'countries' => $countries]);
     }
 
     /**
@@ -61,6 +57,7 @@ class ProductController extends Controller
 
             $category = $request->get('category_id');
             $country = $request->get('country_id');
+            $date_death_name = $request->get('date_death_name');
 
             $product = new Product();
             $product->title = $request->title;
@@ -73,6 +70,7 @@ class ProductController extends Controller
             $product->found_date = $request->found_date;
             $product->date_born = $request->date_born;
             $product->date_death = $request->date_death;
+            $product->date_death_name = $date_death_name;
             $product->country_id = $country;
             $product->category_id = $category;
             $product->user_id = Auth::id();
@@ -92,8 +90,11 @@ class ProductController extends Controller
 
             }
 
-
-            echo "Upload Successfully";
+            if($product)
+            {
+                alert()->success('Product Created', 'Successfully');
+                return redirect()->route('product.index');
+            }
 
         } else {
 

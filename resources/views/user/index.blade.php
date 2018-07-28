@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-
+    @include('sweetalert::alert')
     <!-- Characteristics -->
 
     <div class="characteristics">

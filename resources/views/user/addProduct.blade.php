@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/styles/bootstrap4/bootstrap.min.css') }}">
     <link href="{{ asset('front/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
@@ -23,7 +24,7 @@
     <header class="header">
 
         <!-- Top Bar -->
-
+        @include('sweetalert::alert')
         <div class="top_bar">
             <div class="container">
                 <div class="row">
@@ -157,11 +158,11 @@
                                 @endif
                             </div>
                             <div class="col-lg-6">
-                                <select name="" id="" class="form-control">
+                                <select name="date_death_name" id="" class="form-control">
                                     <option selected disabled>--select once--</option>
-                                    <option value="1">Yil</option>
-                                    <option value="2">Oy</option>
-                                    <option value="3">Kun</option>
+                                    <option value="yil">Yil</option>
+                                    <option value="oy">Oy</option>
+                                    <option value="kun">Kun</option>
                                 </select>
                             </div>
                         </div>

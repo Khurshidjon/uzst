@@ -20,13 +20,12 @@ class CreateProductsTable extends Migration
             $table->text('details');
             $table->text('save_conditions');
             $table->text('danger');
-            /*---*/
-                $table->text('danger_type');
-                $table->string('buy_place');
-                $table->timestamp('found_date');
-            /*---*/
+            $table->text('danger_type');
+            $table->string('buy_place');
+            $table->timestamp('found_date');
             $table->timestamp('date_born');
-            $table->string('date_death')->nullable();
+            $table->unsignedInteger('date_death')->nullable();
+            $table->string('date_death_name')->nullable();
             $table->unsignedInteger('country_id');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('user_id');

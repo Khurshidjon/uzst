@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/plugins/OwlCarousel2-2.2.1/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/styles/product_styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/styles/product_responsive.css') }}">
-
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 
 
 </head>
@@ -371,7 +371,7 @@
                         <hr>
                         <h4 class="text-dark"><span><strong class="text-info">Ishlab chiqarilgan sana: </strong></span>{{date('d.m.Y', strtotime($product->date_born)) }}</h4>
                         <hr>
-                        <h4 class="text-dark"><span><strong class="text-info">Yaroqlilik muddati: </strong></span>{{ $product->date_death }}</h4>
+                        <h4 class="text-dark"><span><strong class="text-info">Yaroqlilik muddati: </strong></span>{{ $product->date_death .' ' . $product->date_death_name }} </h4>
                         <hr>
                         <h4 class="text-dark"><p><b class="text-info">Harid qilingan joyi: </b><br>{{ $product->buy_place }}</p></h4>
                         <hr>

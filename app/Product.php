@@ -4,10 +4,12 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class Product extends Model
 {
     use Sluggable;
+
 
     public function sluggable()
     {
@@ -53,5 +55,9 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function d_of_h()
+    {
+        return $this->belongsTo(degree_of_hazard::class, 'degree_of_hazard_id');
     }
 }

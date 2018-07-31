@@ -2,11 +2,10 @@
 @section('title', 'Sign in')
 @section('yield')
     <body class="bg-image bg-parallax" id="myDiv" onload="myFunction()" style="background: url({{asset('auth-images/9.jpg')}}); background-size: cover;" >
+    @include('sweetalert::alert')
     <div class="container-fluid">
         <div class="row">
-            @include('sweetalert::alert')
-
-            <div id="login-form" class="col-md-6">
+            <div id="login-form" class="col-md-6" style="z-index: 0">
                 <form action="{{route('login')}}" method="post">
                     {{ csrf_field() }}
                     <i class="fa fa-user-circle mb-3" style="font-size: 10em; color: bisque"></i>

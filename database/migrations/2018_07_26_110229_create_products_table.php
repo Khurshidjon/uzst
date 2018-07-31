@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('country_id');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('degree_of_hazard_id');
             $table->timestamps();
         });
     }

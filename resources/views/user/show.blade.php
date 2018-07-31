@@ -361,11 +361,36 @@
                 </div>
                 <!-- Description -->
                 <div class="col-lg-5 order-3">
-                    <div class="product_description">
+                    <div class="">
+                            <p class="text-danger"><span><strong class="text-info">Mahsulot kategoriyasi: </strong></span>{{ $product->category->categories }}</p>
 
-                        <p class="text-danger"><span><strong class="text-info">Mahsulot kategoriyasi: </strong></span>{{ $product->category->categories }}</p>
                         <hr>
-                        <h4 class="text-dark"><span><strong class="text-info">Mahsulot nomi: </strong></span>{!! $product->title !!}</h4>
+                        @if($product->d_of_h->degree_id == 1)
+                            <p class="text-danger"><span><strong class="text-info">Xavflilik darajasi: </strong></span>{{ $product->d_of_h->degree_of_hazards }} <sup><span class="badge" style="color: white; font-size: 12px; background-color: #ff9917">{{ $product->d_of_h->degree_id }}</span></sup></p>
+                        @elseif($product->d_of_h->degree_id == 2)
+                            <p class="text-danger"><span><strong class="text-info">Xavflilik darajasi: </strong></span>{{ $product->d_of_h->degree_of_hazards }} <sup><span class="badge" style="color: white; font-size: 12px;  background-color: #FFE234">{{ $product->d_of_h->degree_id }}</span></sup></p>
+                        @elseif($product->d_of_h->degree_id == 3)
+                            <p class="text-danger"><span><strong class="text-info">Xavflilik darajasi: </strong></span>{{ $product->d_of_h->degree_of_hazards }} <sup><span class="badge" style="color: white; font-size: 12px; background-color: #ff9917">{{ $product->d_of_h->degree_id }}</span></sup></p>
+                        @elseif($product->d_of_h->degree_id == 4)
+                            <p class="text-danger"><span><strong class="text-info">Xavflilik darajasi: </strong></span>{{ $product->d_of_h->degree_of_hazards }} <sup><span class="badge" style="color: white; font-size: 12px; background-color: #ff6f13">{{ $product->d_of_h->degree_id }}</span></sup></p>
+                        @elseif($product->d_of_h->degree_id == 5)
+                            <p class="text-danger"><span><strong class="text-info">Xavflilik darajasi: </strong></span>{{ $product->d_of_h->degree_of_hazards }} <sup><span class="badge" style="color: white; font-size: 12px; background-color: red">{{ $product->d_of_h->degree_id }}</span></sup></p>
+                        @endif
+                            <div class="progress">
+                            @if($product->d_of_h->degree_id == 1)
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" style=" width: 20%; background-color: yellowgreen"></div>
+                            @elseif($product->d_of_h->degree_id == 2)
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:40%; background-color: #FFE234"></div>
+                            @elseif($product->d_of_h->degree_id == 3)
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:60%; background-color: #ff9917"></div>
+                            @elseif($product->d_of_h->degree_id == 4)
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:80%; background-color: #ff6f13"></div>
+                            @elseif($product->d_of_h->degree_id == 5)
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:100%; background-color: red"></div>
+                            @endif
+                        </div>
+                        <hr>
+                        <h4 class="text-dark product_name"><span><strong class="text-info">Mahsulot nomi: </strong></span>{!! $product->title !!}</h4>
                         <hr>
                         <h4 class="text-dark"><span><strong class="text-info">Kelib chiqishi: </strong></span>{!! $product->country->countries !!}</h4>
                         <hr>
@@ -373,9 +398,11 @@
                         <hr>
                         <h4 class="text-dark"><span><strong class="text-info">Yaroqlilik muddati: </strong></span>{{ $product->date_death .' ' . $product->date_death_name }} </h4>
                         <hr>
+                        <h4 class="text-dark"><span><strong class="text-info">Yaroqsizligi aniqlangan kun: </strong></span>{{ date("d.m.Y", strtotime($product->found_date))}} </h4>
+                        <hr>
                         <h4 class="text-dark"><p><b class="text-info">Harid qilingan joyi: </b><br>{{ $product->buy_place }}</p></h4>
                         <hr>
-                        <h4 class="text-dark"><p><b class="text-info">Mahsulot haqida: </b><br>{{ $product->details }}</p></h4>
+                        <h4 class="text-dark product_text"><p><b class="text-info">Mahsulot haqida: </b><br>{{ $product->details }}</p></h4>
                         <hr>
                         <h4 class="text-dark"><p><b class="text-info">Mahsulot xavfi: </b><br>{{ $product->danger }}</p></h4>
 

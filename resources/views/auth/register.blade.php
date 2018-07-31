@@ -20,6 +20,7 @@
 </head>
 <body class="bg-image bg-parallax animatebottom" id="myDiv" onload="myFunction()" style="background: url({{asset('auth-images/8.jpg')}}); background-repeat: no-repeat">
 <div class="container-fluid">
+    @include('sweetalert::alert')
     <div class="row">
         <div id="reg-form" class="col-md-6">
             <form action="{{route('register')}}" method="post" style="position: fixed; margin-top: 8em">

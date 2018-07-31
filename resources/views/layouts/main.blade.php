@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-    <link rel="stylesheet" type="text/css" href="front/styles/bootstrap4/bootstrap.min.css">
-    <link href="front/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="front/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="front/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-    <link rel="stylesheet" type="text/css" href="front/plugins/OwlCarousel2-2.2.1/animate.css">
-    <link rel="stylesheet" type="text/css" href="front/plugins/slick-1.8.0/slick.css">
-    <link rel="stylesheet" type="text/css" href="front/styles/main_styles.css">
-    <link rel="stylesheet" type="text/css" href="front/styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('styles/bootstrap4/bootstrap.min.css')}}">
+    <link href="{{ asset('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick-1.8.0/slick.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+
 
 </head>
 
@@ -56,37 +56,37 @@
                                             <li><a href="#">JPY Japanese Yen</a></li>
                                         </ul>
                                     </li>
-                                        <div class="top_bar_user">
-                                            @guest
-                                                <div>
-                                                    <div class="user_icon"><img src="images/user.svg" alt=""></div>
-                                                    <a href="{{ route('register') }}">Register</a>
-                                                </div>
-                                                <div>
-                                                    <div class="user_icon"><img src="images/user.svg" alt=""></div>
-                                                    <a href="{{ route('login') }}">Sign in</a>
-                                                </div>
-                                            @else
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                                {{ Auth::user()->name }} <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="{{ route('logout') }}"
+                                    <div class="top_bar_user">
+                                    @guest
+                                            <div>
+                                                <div class="user_icon"><img src="images/user.svg" alt=""></div>
+                                                <a href="{{ route('register') }}">Register</a>
+                                            </div>
+                                            <div>
+                                                <div class="user_icon"><img src="images/user.svg" alt=""></div>
+                                                <a href="{{ route('login') }}">Sign in</a>
+                                            </div>
+                                        @else
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="{{ route('logout') }}"
                                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                        Logout
-                                                    </a>
+                                                            Logout
+                                                        </a>
 
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                        {{ csrf_field() }}
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                            @endguest
-                                        </div>
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            {{ csrf_field() }}
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        @endguest
+                                    </div>
                                 </ul>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                     <!-- Logo -->
                     <div class="col-lg-2 col-sm-3 col-3 order-1">
                         <div class="logo_container">
-                            <div class="logo"><a href="#">OneTech</a></div>
+                            <div class="logo"><a href="{{ route('product.index') }}">OneTech</a></div>
                         </div>
                     </div>
 
@@ -113,21 +113,16 @@
                         <div class="header_search">
                             <div class="header_search_content">
                                 <div class="header_search_form_container">
-                                    <form action="#" class="header_search_form clearfix">
-                                        <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+                                    <form action="{{ route('product.search') }}" class="header_search_form " method="POST">
+                                        @csrf
+                                        <input name="search" type="text" required class="header_search_input" placeholder="Search for products...">
                                         <div class="custom_dropdown">
-                                            <div class="custom_dropdown_list">
-                                                <span class="custom_dropdown_placeholder clc">All Categories</span>
-                                                <i class="fas fa-chevron-down"></i>
-                                                <ul class="custom_list clc">
-                                                    <li><a class="clc" href="#">All Categories</a></li>
-                                                    <li><a class="clc" href="#">Computers</a></li>
-                                                    <li><a class="clc" href="#">Laptops</a></li>
-                                                    <li><a class="clc" href="#">Cameras</a></li>
-                                                    <li><a class="clc" href="#">Hardware</a></li>
-                                                    <li><a class="clc" href="#">Smartphones</a></li>
-                                                </ul>
-                                            </div>
+                                            <select name="search_category" id="" class="form-control" style="width: 12em; border: none; float: right; height: 3em">
+                                                <option value="0" selected>--All categories--</option>
+                                            @foreach($categories as $category)
+                                                    <option value="{{$category->id}}"> {{ $category->categories}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
                                     </form>
@@ -372,7 +367,7 @@
     </header>
 @yield('content')
 
-<!-- Footer -->
+    <!-- Footer -->
 
     <footer class="footer">
         <div class="container">
@@ -476,16 +471,17 @@
     </div>
 </div>
 
-<script src="front/styles/bootstrap4/popper.js"></script>
-<script src="front/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="front/plugins/greensock/TweenMax.min.js"></script>
-<script src="front/plugins/greensock/TimelineMax.min.js"></script>
-<script src="front/plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="front/plugins/greensock/animation.gsap.min.js"></script>
-<script src="front/plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="front/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="front/plugins/slick-1.8.0/slick.js"></script>
-<script src="front/plugins/easing/easing.js"></script>
-<script src="front/js/custom.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+<script src="{{asset('styles/bootstrap4/bootstrap.min.js')}}"></script>
+<script src="{{ asset('plugins/greensock/TweenMax.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TimelineMax.min.js') }}"></script>
+<script src="{{ asset('plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/animation.gsap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+<script src="{{ asset('plugins/slick-1.8.0/slick.js') }}"></script>
+<script src="{{ asset('plugins/easing/easing.js') }}"></script>
+<script src="{{asset('js/custom.js')}}"></script>
 </body>
 </html>

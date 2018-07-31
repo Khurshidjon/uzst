@@ -6,23 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/product_styles.css') }}">
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/styles/bootstrap4/bootstrap.min.css') }}">
-    <link href="{{ asset('front/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/plugins/OwlCarousel2-2.2.1/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/styles/product_styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/styles/product_responsive.css') }}">
 </head>
 
-<body>
+<body style="z-index: 0">
 
 <div class="super_container">
     <!-- Header -->
     <header class="header">
-
         <!-- Top Bar -->
         @include('sweetalert::alert')
         <div class="top_bar">
@@ -90,6 +85,75 @@
                 </div>
             </div>
         </div>
+        <div class="header_main">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Logo -->
+                    <div class="col-lg-2 col-sm-3 col-3 order-1">
+                        <div class="logo_container">
+                            <div class="logo"><a href="{{ route('product.index') }}">OneTech</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                        <div class="header_search">
+                            <div class="header_search_content">
+                                <div class="header_search_form_container">
+                                    <form action="#" class="header_search_form clearfix">
+                                        <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+                                        <div class="custom_dropdown">
+                                            <div class="custom_dropdown_list">
+                                                <span class="custom_dropdown_placeholder clc">All Categories</span>
+                                                <i class="fas fa-chevron-down"></i>
+                                                <ul class="custom_list clc">
+                                                    <li><a class="clc" href="#">All Categories</a></li>
+                                                    <li><a class="clc" href="#">Computers</a></li>
+                                                    <li><a class="clc" href="#">Laptops</a></li>
+                                                    <li><a class="clc" href="#">Cameras</a></li>
+                                                    <li><a class="clc" href="#">Hardware</a></li>
+                                                    <li><a class="clc" href="#">Smartphones</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist -->
+                    <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                        <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                            <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+                                <div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
+                                <div class="wishlist_content">
+                                    <div class="wishlist_text"><a href="#">Wishlist</a></div>
+                                    <div class="wishlist_count">115</div>
+                                </div>
+                            </div>
+
+                            <!-- Cart -->
+                            <div class="cart">
+                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                    <div class="cart_icon">
+                                        <img src="images/cart.png" alt="">
+                                        <div class="cart_count"><span>10</span></div>
+                                    </div>
+                                    <div class="cart_content">
+                                        <div class="cart_text"><a href="#">Cart</a></div>
+                                        <div class="cart_price">$85</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
     </header>
     {{--Section for add new danger product--}}
     <div class="container w-75">
@@ -100,21 +164,21 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="category_id">Mahsulot kategoriyas <span class="text-danger">*</span></label>
-                        <select name="category_id" id="" class="form-control {{ $errors->has('category_id') ? ' is-invalid' : '' }}">
+                        <select name="category_id" class="form-control {{ $errors->has('category_id') ? ' is-invalid' : '' }}">
                             @if ($errors->has('category_id'))
                                 <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('category_id') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('category_id') }}</strong>
+                                </span>
                             @endif
                                 <option value="" disabled selected>--Select once--</option>
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}"> {{ $category->categories }}</option>
+                                <option value="{{ $category->id }}"> {{ $category->categories }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="country_id">Kelib chiqishi <span class="text-danger">*</span></label>
-                        <select name="country_id" id="" class="form-control {{ $errors->has('country_id') ? ' is-invalid' : '' }}">
+                        <select name="country_id" class="form-control {{ $errors->has('country_id') ? ' is-invalid' : '' }}">
                             @if ($errors->has('country_id'))
                                 <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('country_id') }}</strong>
@@ -147,10 +211,10 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="date_death">Yaroqlilik muddati <span class="text-danger">*</span></label>
+                        <label for="date_death">Yaroqlilik muddati <span class="text-success">(optional)</span></label>
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" name="date_death" id="date_death" class="form-control {{ $errors->has('date_death') ? ' is-invalid' : '' }}">
+                                <input type="number" name="date_death" id="date_death" class="form-control {{ $errors->has('date_death') ? ' is-invalid' : '' }}" placeholder="1, 2, 3 ... ->">
                             @if ($errors->has('date_death'))
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('date_death') }}</strong>
@@ -166,13 +230,35 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="degree_of_hazard">Xavflilik darajasi <span class="text-danger">*</span></label>
+                        <select name="degree_of_hazard" id="" class="form-control {{ $errors->has('degree_of_hazard') ? ' is-invalid' : '' }}">
+                            @if ($errors->has('degree_of_hazard'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('degree_of_hazard') }}</strong>
+                                </span>
+                            @endif
+                            <option value="" disabled selected>--Select once--</option>
+                                @foreach($degree_of_hazards as $degree_of_hazard)
+                                    <option value="{{$degree_of_hazard->id}}">{{ $degree_of_hazard->degree_of_hazards }}</option>
+                                @endforeach
+{{--
+                                <option value="Sog'liq uchun zararli bo'lishi mumkin">Sog'liq uchun zararli bo'lishi mumkin</option>
+                                <option value="Xavfli">Xavfli</option>
+                                <option value="Ehtiyot bo'ling">Ehtiyot bo'ling</option>
+                                <option value="Judayam xavfli">Judayam xavfli</option>
+                                <option value="Hayot uchun xavfli">Hayot uchun xavfli</option>
+--}}
+
+                        </select>
                     </div>
                 </div>
                     <div class="col-md-8">
                 <div class="form-group">
                     <label for="title">Mahsulot nomi <span class="text-danger">*</span></label>
-                    <input id="title" type="text" name="title" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" >
+                    <input id="title" type="text" name="title" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Mahsulot nomi">
                     @if ($errors->has('title'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('title') }}</strong>
@@ -181,7 +267,7 @@
                 </div>
                 <div class="form-group">
                     <label for="save_conditions">Saqlash sharoitlar<span class="text-danger">*</span></label>
-                    <input id="save_conditions" type="text" name="save_conditions" class="form-control {{ $errors->has('save_conditions') ? ' is-invalid' : '' }}" >
+                    <input id="save_conditions" type="text" name="save_conditions" class="form-control {{ $errors->has('save_conditions') ? ' is-invalid' : '' }}" placeholder="+/-C, va hokazo">
                     @if ($errors->has('save_conditions'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('save_conditions') }}</strong>
@@ -190,7 +276,7 @@
                 </div>
                 <div class="form-group">
                     <label for="buy_place">Xarid qilingan joy <span class="text-danger">*</span></label>
-                    <input id="buy_place" type="text" name="buy_place" class="form-control {{ $errors->has('buy_place') ? ' is-invalid' : '' }}" >
+                    <input id="buy_place" type="text" name="buy_place" class="form-control {{ $errors->has('buy_place') ? ' is-invalid' : '' }}" placeholder="Savdo majmuasi, manzili">
                     @if ($errors->has('buy_place'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('buy_place') }}</strong>
@@ -199,7 +285,7 @@
                 </div>
                 <div class="form-group">
                     <label for="details">Mahsulot haqida <span class="text-danger">*</span></label>
-                    <textarea id="details" name="details" rows="4" class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}"></textarea>
+                    <textarea id="details" name="details" rows="4" class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}" placeholder="Umumiy ma'lumotlar"></textarea>
                     @if ($errors->has('details'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('details') }}</strong>
@@ -208,7 +294,7 @@
                 </div>
                 <div class="form-group">
                     <label for="danger">Mahsulot xavfi haqida <span class="text-danger">*</span></label>
-                    <textarea id="danger" name="danger" rows="4" class="form-control {{ $errors->has('danger') ? ' is-invalid' : '' }}"></textarea>
+                    <textarea id="danger" name="danger" rows="4" class="form-control {{ $errors->has('danger') ? ' is-invalid' : '' }}" placeholder="Ehtimoliy xavf xatarlar haqida"></textarea>
                     @if ($errors->has('danger'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('danger') }}</strong>
@@ -217,7 +303,7 @@
                 </div>
                 <div class="form-group">
                     <label for="danger_type">Mahsulot aybi <span class="text-danger">*</span></label>
-                    <textarea id="danger_type" name="danger_type" rows="4" class="form-control {{ $errors->has('danger_type') ? ' is-invalid' : '' }}"></textarea>
+                    <textarea id="danger_type" name="danger_type" rows="4" class="form-control {{ $errors->has('danger_type') ? ' is-invalid' : '' }}" placeholder="Mauhsulotning aybi"></textarea>
                     @if ($errors->has('danger_type'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('danger_type') }}</strong>
@@ -226,6 +312,7 @@
                 </div>
                 <div class="form-group">
                     <label for="product_photo">Mahsulot rasmi <span class="text-danger">*</span></label>
+                    <span class="text-danger">5 ta rasm</span>
                     <input id="product_photo" type="file" name="photos[]" class="form-control {{ $errors->has('photos') ? ' is-invalid' : '' }}" multiple>
                     @if ($errors->has('photos'))
                         <span class="invalid-feedback" role="alert">
@@ -343,16 +430,15 @@
     </div>
 </div>
 
-<script src="{{ asset('front/js/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ asset('front/styles/bootstrap4/popper.js') }}"></script>
-<script src="{{ asset('front/styles/bootstrap4/bootstrap.min.js') }}"></script>
-<script src="{{ asset('front/plugins/greensock/TweenMax.min.js') }}"></script>
-<script src="{{ asset('front/plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
-<script src="{{ asset('front/plugins/greensock/animation.gsap.min.js') }}"></script>
-<script src="{{ asset('front/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
-<script src="{{ asset('front/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
-<script src="{{ asset('front/plugins/easing/easing.js') }}"></script>
-<script src="{{ asset('front/js/product_custom.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TweenMax.min.js') }}"></script>
+<script src="{{ asset('plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/animation.gsap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+<script src="{{ asset('plugins/easing/easing.js') }}"></script>
+<script src="{{ asset('/js/product_custom.js') }}"></script>
 </body>
 
 </html>

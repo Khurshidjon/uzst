@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Country;
-use App\Day;
-use App\Month;
+use App\degree_of_hazard;
 use App\Product;
 use App\ProductPhoto;
-use App\Year;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Cviebrock\EloquentSluggable\Tests\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Intervention\Image\Facades\Image;
 class ProductController extends Controller
 {
     /**
@@ -24,7 +24,10 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(20);
-        return view('user.index', ['products' => $products]);
+        $categories = Category::all();
+        $randoms = Product::where('slug', '!=', $products)->get()->random(3);
+        $news = Product::latest()->paginate(6);
+        return view('user.index', ['products' => $products, 'randoms' => $randoms, 'news' => $news, 'categories' => $categories]);
     }
 
     /**
@@ -36,7 +39,9 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $countries = Country::all();
-        return view('user.addProduct', ['categories' => $categories, 'countries' => $countries]);
+        $degree_of_hazards = degree_of_hazard::all();
+
+        return view('user.addProduct', ['categories' => $categories, 'countries' => $countries, 'degree_of_hazards' => $degree_of_hazards]);
     }
 
     /**
@@ -49,6 +54,17 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'photos' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+            'degree_of_hazard'=>'required',
+            'save_conditions' => 'required',
+            'danger' => 'required',
+            'danger_type' => 'required',
+            'buy_place' => 'required',
+            'found_date' => 'required',
+            'date_born' => 'required',
+            'country_id' => 'required',
+            'category_id' => 'required',
             'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120'
         ]);
         if ($request->hasFile('photos') && count('photos') <= 5) {
@@ -74,6 +90,7 @@ class ProductController extends Controller
             $product->country_id = $country;
             $product->category_id = $category;
             $product->user_id = Auth::id();
+            $product->degree_of_hazard_id = $request->get('degree_of_hazard');
             $product->save();
 
 
@@ -98,7 +115,8 @@ class ProductController extends Controller
 
         } else {
 
-            echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc</div>';
+            alert()->error('Oops...', 'Something went wrong!');
+            return redirect()->route('add.product');
 
         }
 
@@ -148,5 +166,15 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+    public function search(Request $request)
+    {
+        $searchString = $request->input('search');
+
+        $product_column = $request->get('search_category');
+
+        $result = DB::table('products')->where('title', 'LIKE', '%'. $request->input('search').'%')->get();
+
+        return response()->json($result);
     }
 }
